@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Navbar.css';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/userSlice';
 import toast, { Toaster } from 'react-hot-toast';
@@ -23,17 +23,15 @@ const Navbar = () => {
 
     return (
         <div>
-            <Toaster/>
+            <Toaster />
             <nav className="navbar">
                 <div className="logo">Logo</div>
                 <div className="menu-icon" onClick={toggleSidebar}>
-                    &#9776; {/* Hamburger icon */}
+                    &#9776;
                 </div>
                 <ul className={`nav-links`}>
                     <Link to='/'><li>Home</li></Link>
-                    <Link to='/faq'><li>Faq</li></Link>
-                    <Link to='/contact-us'><li>Contact</li></Link>
-                    {user &&(user.isAdmin && <Link to='/admin'><li>Admin</li></Link>)}
+                    {user && (user.isAdmin && <Link to='/admin'><li>Admin</li></Link>)}
                     {!user ? (
                         <>
                             <Link to='/login'><li>Login</li></Link>
@@ -41,8 +39,10 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
-                        <Link to='/profile'><li>Profile</li></Link>
-                        <li onClick={handleLogout}>Logout</li>
+                            <Link to='/dis'><li>Disasters</li></Link>
+                            <Link to='/nondis'><li>Non Verified Disasters</li></Link>
+                            <Link to='/profile'><li>Profile</li></Link>
+                            <li onClick={handleLogout}>Logout</li>
                         </>
                     )}
                 </ul>
