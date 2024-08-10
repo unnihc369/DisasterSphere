@@ -57,7 +57,7 @@ const Admin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://disaster-sphere-backend.vercel.app/user/alert', {
+            const response = await fetch('http://localhost:5000/user/alert', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -154,8 +154,6 @@ const Admin = () => {
                     <button type="submit">Send Alert</button>
                 </form>
             </div>
-            <NonVerifiedDisasters/>
-            <VerifiedDisasters/>
         </div>
     );
 };

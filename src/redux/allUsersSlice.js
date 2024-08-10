@@ -3,14 +3,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Async thunk to fetch users
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-    const response = await fetch('https://disaster-sphere-backend.vercel.app/user/users');
+    const response = await fetch('http://localhost:5000/user/users');
     const data = await response.json();
     return data;
 });
 
 // Async thunk to update a user's admin status
 export const updateUserAdminStatus = createAsyncThunk('users/updateUserAdminStatus', async ({ id, isAdmin }) => {
-    const response = await fetch(`https://disaster-sphere-backend.vercel.app/user/${id}`, {
+    const response = await fetch(`http://localhost:5000/user/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

@@ -20,7 +20,7 @@ const Login = () => {
         const requestBody = { email, password };
 
         try {
-            const response = await fetch('https://disaster-sphere-backend.vercel.app/user/login', {
+            const response = await fetch('http://localhost:5000/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

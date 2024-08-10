@@ -46,9 +46,9 @@ const VerifiedDisasters = () => {
                                 {isAdmin && <td>
                                     <button onClick={() => handleDelete(disaster._id)}>Delete</button>
                                 </td>}
-                                <Link to={`/disaster/${disaster._id}`}>
+                                <td><Link to={`/disaster/${disaster._id}`}>
                                     <button>View Details</button>
-                                </Link>
+                                </Link></td>
                             </tr>
                         ))}
                 </tbody>

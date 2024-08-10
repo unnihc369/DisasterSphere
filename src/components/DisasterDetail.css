@@ -57,6 +57,15 @@
     cursor: pointer;
 }
 
+.delete-button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .fulfilled-status {
     color: #6c757d;
     font-style: italic;

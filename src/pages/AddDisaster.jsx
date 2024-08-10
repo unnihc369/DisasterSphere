@@ -24,7 +24,7 @@ const AddDisaster = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://disaster-sphere-backend.vercel.app/dis', {
+            const response = await fetch('http://localhost:5000/dis', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

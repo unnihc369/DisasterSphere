@@ -19,7 +19,7 @@ const DisasterDetail = () => {
     useEffect(() => {
         const fetchDisaster = async () => {
             try {
-                const response = await axios.get(`https://disaster-sphere-backend.vercel.app/dis/${id}`);
+                const response = await axios.get(`http://localhost:5000/dis/${id}`);
                 setDisaster(response.data);
             } catch (error) {
                 console.error('Failed to fetch disaster:', error);
@@ -30,7 +30,7 @@ const DisasterDetail = () => {
 
         const fetchMaterials = async () => {
             try {
-                const response = await axios.get(`https://disaster-sphere-backend.vercel.app/mat/${id}`);
+                const response = await axios.get(`http://localhost:5000/mat/${id}`);
                 setMaterials(response.data);
             } catch (error) {
                 console.error('Failed to fetch materials:', error);
@@ -43,7 +43,7 @@ const DisasterDetail = () => {
 
     const handleVolunteer = async () => {
         try {
-            const response = await axios.post('https://disaster-sphere-backend.vercel.app/dis/vol', {
+            const response = await axios.post('http://localhost:5000/dis/vol', {
                 userId: user._id,
                 disasterId: disaster._id
             });
@@ -60,7 +60,7 @@ const DisasterDetail = () => {
 
     const handleAddMaterial = async () => {
         try {
-            const response = await axios.post('https://disaster-sphere-backend.vercel.app/mat/add', {
+            const response = await axios.post('http://localhost:5000/mat/add', {
                 disasterId: id,
                 itemName,
                 quantityNeeded,
@@ -80,9 +80,9 @@ const DisasterDetail = () => {
 
     const handleAcceptMaterial = async (materialId) => {
         try {
-            const response = await axios.post(`https://disaster-sphere-backend.vercel.app/mat/accept/${materialId}`, {
+            const response = await axios.post(`http://localhost:5000/mat/accept/${materialId}`, {
                 username: user.name,
-            }); 
+            });
 
             if (response.status === 200) {
                 setMaterials(materials.map(material =>
@@ -93,6 +93,19 @@ const DisasterDetail = () => {
         } catch (error) {
             console.error('Failed to accept material:', error);
             toast.error('Failed to accept material.');
+        }
+    };
+
+    const handleDeleteMaterial = async (materialId) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/mat/${materialId}`);
+
+            if (response.status === 200) {
+                setMaterials(materials.filter(material => material._id !== materialId));
+                toast.success('Material deleted successfully!');
+            }
+        } catch (error) {
+            toast.error('Failed to delete material.');
         }
     };
 
@@ -111,14 +124,11 @@ const DisasterDetail = () => {
                 <p><strong>City:</strong> {disaster.city}</p>
                 <p><strong>Description:</strong> {disaster.disc}</p>
                 <p><strong>Place:</strong> {disaster.Place}</p>
-                <p><strong>Verified:</strong> {disaster.isVerified ? 'Yes' : 'No'}</p>
             </div>
-            {!hasVolunteered ? (
+            {!hasVolunteered && (
                 <button onClick={handleVolunteer} className="volunteer-button">
                     Volunteer for this Disaster
                 </button>
-            ) : (
-                <p className="volunteer-status">Already a volunteer</p>
             )}
             {hasVolunteered && <div className="materials-section">
                 <h3>Required Materials</h3>
@@ -127,11 +137,21 @@ const DisasterDetail = () => {
                         <li key={material._id} className="material-item">
                             <p>{material.itemName} - Quantity Needed: {material.quantityNeeded}</p>
                             {!material.fulfilled ? (
-                                <button onClick={() => handleAcceptMaterial(material._id)} className="accept-button">
-                                    Accept to Donate
-                                </button>
+                                <>
+                                    <button onClick={() => handleAcceptMaterial(material._id)} className="accept-button">
+                                        Accept to Donate
+                                    </button>
+                                    <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
+                                        Delete
+                                    </button>
+                                </>
                             ) : (
-                                <p className="fulfilled-status">Accepted by: {material.volunteer ? material.volunteer : 'Unknown'}</p>
+                                <>
+                                    <p className="fulfilled-status">Accepted by: {material.volunteer ? material.volunteer : 'Unknown'}</p>
+                                    {user.isAdmin && <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
+                                        Delete
+                                    </button>}
+                                </>
                             )}
                         </li>
                     ))}
