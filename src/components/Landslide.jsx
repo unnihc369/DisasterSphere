@@ -4,12 +4,10 @@ import './common.css';
 const Landslide = () => {
     return (
         <div className="disaster-container">
-            {/* Header Section */}
             <header className="disaster-header">
                 <h1>Landslide</h1>
             </header>
 
-            {/* What is a Landslide Section */}
             <section className="disaster-section">
                 <div className="disaster-image">
                     <img src="landslide-image-url.jpg" alt="Landslide" />
@@ -30,7 +28,6 @@ const Landslide = () => {
                 </div>
             </section>
 
-            {/* Signs of a Landslide Section */}
             <section className="disaster-section">
                 <div className="disaster-content">
                     <h2>Signs of a Landslide</h2>
@@ -49,7 +46,6 @@ const Landslide = () => {
                 </div>
             </section>
 
-            {/* How to Act During a Landslide Section */}
             <section className="disaster-section">
                 <div className="disaster-content">
                     <h2>How to Act During a Landslide</h2>
@@ -82,7 +78,6 @@ const Landslide = () => {
                 </div>
             </section>
 
-            {/* Government Helplines Section */}
             <section className="helpline-info">
                 <h3>Government Helplines</h3>
                 <p>India Disaster Management Helpline: 1078</p>

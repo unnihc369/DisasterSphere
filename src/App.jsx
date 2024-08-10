@@ -18,13 +18,13 @@ import AddDisaster from './pages/AddDisaster';
 import NonVerifiedDisasters from './components/NonVerifiedDisasters';
 import DisasterDetail from './components/DisasterDetail';
 import VerifiedDisasters from './components/VerifiedDisasters';
-import DisasterView from './components/DisasterView';
-import Earthquake from './components/Earthquake';
-import Flood from './components/Flood';
-import Cyclone from './components/Cyclone';
-import Wildfire from './components/Wildfire';
-import Tsunami from './components/Tsunami';
-import Landslide from './components/Landslide';
+import DisasterView from './components/DisasterView.jsx';
+import Earthquake from './components/Earthquake.jsx';
+import Flood from './components/Flood.jsx';
+import Cyclone from './components/Cyclone.jsx';
+import Wildfire from './components/Wildfire.jsx';
+import Tsunami from './components/Tsunami.jsx';
+import Landslide from './components/Landslide.jsx';
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -36,7 +36,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
-          <Route path="/adddisaster" element={user ? <AddDisaster /> : <Navigate to="/login" replace />}/>
+          <Route path="/adddisaster" element={user ? <AddDisaster /> : <Navigate to="/login" replace />} />
           <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/login" replace />} />
           <Route path="/dis" element={user ? <VerifiedDisasters /> : <Navigate to="/login" replace />} />
           <Route path="/faq" element={<FAQ />} />
@@ -47,13 +47,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/nondis" element={<NonVerifiedDisasters />} />
           <Route path="/disaster/:id" element={<DisasterDetail />} />
-          <Route path="/disasterview" exact component={DisasterView} />
-                <Route path="/earthquake" component={Earthquake} />
-                <Route path="/flood" component={Flood} />
-                <Route path="/cyclone" component={Cyclone} />
-                <Route path="/wildfire" component={Wildfire} />
-                <Route path="/tsunami" component={Tsunami} />
-                <Route path="/landslide" component={Landslide} />
+          <Route path="/disasterview" element={<DisasterView/>} />
+          <Route path="/earthquake" element={<Earthquake/>} />
+          <Route path="/flood" element={<Flood/>} />
+          <Route path="/cyclone" element={<Cyclone/>} />
+          <Route path="/wildfire" element={<Wildfire/>} />
+          <Route path="/tsunami" element={<Tsunami/>} />
+          <Route path="/landslide" element={<Landslide/>} />
         </Routes>
         <Footer />
       </div>

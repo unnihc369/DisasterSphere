@@ -1,0 +1,46 @@
+.disaster-view-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.disaster-view-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.disaster-view-header h1 {
+    color: #333;
+}
+
+.disaster-view-header p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+.disaster-view-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.disaster-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.disaster-list li {
+    margin: 10px 0;
+}
+
+.disaster-link {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #007BFF;
+    transition: color 0.3s ease;
+}
+
+.disaster-link:hover {
+    color: #0056b3;
+}

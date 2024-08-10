@@ -4,12 +4,10 @@ import './common.css';
 const Earthquake = () => {
     return (
         <div className="disaster-container">
-            {/* Header Section */}
             <header className="disaster-header">
                 <h1>Earthquake</h1>
             </header>
 
-            {/* What is an Earthquake Section */}
             <section className="disaster-section">
                 <div className="disaster-image">
                     <img src="earthquake-image-url.jpg" alt="Earthquake" />
@@ -28,7 +26,6 @@ const Earthquake = () => {
                 </div>
             </section>
 
-            {/* Signs of an Earthquake Section */}
             <section className="disaster-section">
                 <div className="disaster-content">
                     <h2>Signs of an Earthquake</h2>
@@ -47,7 +44,6 @@ const Earthquake = () => {
                 </div>
             </section>
 
-            {/* How to Act During an Earthquake Section */}
             <section className="disaster-section">
                 <div className="disaster-content">
                     <h2>How to Act During an Earthquake</h2>
@@ -84,7 +80,6 @@ const Earthquake = () => {
                 </div>
             </section>
 
-            {/* Government Helplines Section */}
             <section className="helpline-info">
                 <h3>Government Helplines</h3>
                 <p>India Disaster Management Helpline: 1078</p>

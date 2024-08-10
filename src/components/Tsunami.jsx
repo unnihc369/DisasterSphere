@@ -4,12 +4,10 @@ import './common.css';
 const Tsunami = () => {
     return (
         <div className="disaster-container">
-            {/* Header Section */}
             <header className="disaster-header">
                 <h1>Tsunami</h1>
             </header>
 
-            {/* What is a Tsunami Section */}
             <section className="disaster-section">
                 <div className="disaster-image">
                     <img src="tsunami-image-url.jpg" alt="Tsunami" />
@@ -28,7 +26,6 @@ const Tsunami = () => {
                 </div>
             </section>
 
-            {/* Signs of a Tsunami Section */}
             <section className="disaster-section">
                 <div className="disaster-content">
                     <h2>Signs of a Tsunami</h2>
@@ -47,7 +44,6 @@ const Tsunami = () => {
                 </div>
             </section>
 
-            {/* How to Act During a Tsunami Section */}
             <section className="disaster-section">
                 <div className="disaster-content">
                     <h2>How to Act During a Tsunami</h2>
@@ -80,7 +76,6 @@ const Tsunami = () => {
                 </div>
             </section>
 
-            {/* Government Helplines Section */}
             <section className="helpline-info">
                 <h3>Government Helplines</h3>
                 <p>India Disaster Management Helpline: 1078</p>
