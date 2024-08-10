@@ -19,7 +19,7 @@ const DisasterDetail = () => {
     useEffect(() => {
         const fetchDisaster = async () => {
             try {
-                const response = await axios.get(`/dis/${id}`);
+                const response = await axios.get(`https://disaster-sphere-backend.vercel.app/dis/${id}`);
                 setDisaster(response.data);
             } catch (error) {
                 console.error('Failed to fetch disaster:', error);
@@ -30,7 +30,7 @@ const DisasterDetail = () => {
 
         const fetchMaterials = async () => {
             try {
-                const response = await axios.get(`/mat/${id}`);
+                const response = await axios.get(`https://disaster-sphere-backend.vercel.app/mat/${id}`);
                 setMaterials(response.data);
             } catch (error) {
                 console.error('Failed to fetch materials:', error);
@@ -43,7 +43,7 @@ const DisasterDetail = () => {
 
     const handleVolunteer = async () => {
         try {
-            const response = await axios.post('/dis/vol', {
+            const response = await axios.post('https://disaster-sphere-backend.vercel.app/dis/vol', {
                 userId: user._id,
                 disasterId: disaster._id
             });
@@ -60,7 +60,7 @@ const DisasterDetail = () => {
 
     const handleAddMaterial = async () => {
         try {
-            const response = await axios.post('/mat/add', {
+            const response = await axios.post('https://disaster-sphere-backend.vercel.app/mat/add', {
                 disasterId: id,
                 itemName,
                 quantityNeeded,
@@ -80,7 +80,7 @@ const DisasterDetail = () => {
 
     const handleAcceptMaterial = async (materialId) => {
         try {
-            const response = await axios.post(`/mat/accept/${materialId}`, {
+            const response = await axios.post(`https://disaster-sphere-backend.vercel.app/mat/accept/${materialId}`, {
                 username: user.name,
             }); 
 

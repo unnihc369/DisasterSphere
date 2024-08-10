@@ -52,7 +52,7 @@ const Signup = () => {
         }
 
         try {
-            const response = await fetch('/user/register', {
+            const response = await fetch('https://disaster-sphere-backend.vercel.app/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

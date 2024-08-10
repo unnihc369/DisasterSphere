@@ -57,7 +57,7 @@ const Admin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/user/alert', {
+            const response = await fetch('https://disaster-sphere-backend.vercel.app/user/alert', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

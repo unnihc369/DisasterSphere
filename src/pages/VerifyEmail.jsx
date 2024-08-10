@@ -21,7 +21,7 @@ const VerifyEmail = () => {
 
         const verifyToken = async () => {
             try {
-                const response = await fetch(`/user/verify-email?token=${token}`, {
+                const response = await fetch(`https://disaster-sphere-backend.vercel.app/user/verify-email?token=${token}`, {
                     method: 'GET',
                 });
 
