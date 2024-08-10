@@ -1,0 +1,104 @@
+/* common.css */
+
+/* Container and Layout */
+.disaster-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.disaster-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.disaster-section {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+.disaster-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.disaster-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.disaster-image {
+    flex: 1;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.disaster-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Typography */
+.disaster-header h1 {
+    font-size: 2.5em;
+    color: #333;
+}
+
+.disaster-content h2 {
+    font-size: 2em;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+.disaster-content p {
+    font-size: 1.1em;
+    line-height: 1.8em;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* List Styles */
+.disaster-content ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.disaster-content ul li {
+    font-size: 1.1em;
+    line-height: 1.6em;
+    color: #555;
+}
+
+/* Advisory Steps */
+.advisory-steps {
+    margin: 20px 0;
+}
+
+.advisory-steps li {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Helpline Info */
+.helpline-info {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 40px;
+}
+
+.helpline-info h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.helpline-info p {
+    font-size: 1.2em;
+    color: #444;
+    margin-bottom: 10px;
+}
