@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { volunteerSuccess } from '../redux/userSlice';
 import './DisasterDetail.css';
 import toast, { Toaster } from 'react-hot-toast';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from '../firebase.js'
 
 const DisasterDetail = () => {
     const { id } = useParams();
@@ -15,6 +17,13 @@ const DisasterDetail = () => {
     const [quantityNeeded, setQuantityNeeded] = useState(0);
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
+
+    //Posts
+    const[title,setTitle] = useState('');
+    const[desc,setDesc] =useState('');
+    const [postImage, setPostImage] = useState(null);
+    const priority = user.isAdmin?1:2;
+    const[posts,setPosts]=useState([]);
 
     useEffect(() => {
         const fetchDisaster = async () => {
@@ -140,6 +149,107 @@ const DisasterDetail = () => {
         }
     }
 
+    const handleSubmitPost = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        let imageUrl = '';
+
+        if (postImage) {
+            const imageRef = ref(storage, `posts/${postImage.name}`);
+            const uploadTask = uploadBytesResumable(imageRef, postImage);
+
+            await uploadTask.then((snapshot) => {
+                return getDownloadURL(snapshot.ref);
+            }).then((url) => {
+                imageUrl = url;
+            }).catch((error) => {
+                toast.error('Failed to upload image');
+                setLoading(false);
+                return;
+            });
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title,
+                    disc: desc,
+                    imageUrl,
+                    priority,
+                    disasterId: id,
+                    userId: user._id,
+                    username:user.name
+                })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                toast.success(data.message);
+                setPosts((prevPosts) => [...prevPosts, data.post]); // Add the new post to the state
+                setTitle('');
+                setDesc('');
+                setPostImage(null);
+            } else {
+                toast.error(data.error);
+            }
+        } catch (error) {
+            toast.error('Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDeletePost = async (postId) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/posts/${postId}`);
+            if (response.status === 200) {
+                setPosts(posts.filter(post => post._id !== postId));
+                toast.success('Post deleted successfully!');
+            }
+        } catch (error) {
+            toast.error('Failed to delete post.');
+        }
+    };
+
+    useEffect(() => {
+        const fetchDisaster = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/dis/${id}`);
+                setDisaster(response.data);
+            } catch (error) {
+                console.error('Failed to fetch disaster:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        const fetchMaterials = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/mat/${id}`);
+                setMaterials(response.data);
+            } catch (error) {
+                console.error('Failed to fetch materials:', error);
+            }
+        };
+
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/posts/disaster/${id}`);
+                setPosts(response.data.sort((a, b) => a.priority - b.priority)); // Sort by priority
+            } catch (error) {
+                console.error('Failed to fetch posts:', error);
+            }
+        };
+
+        fetchDisaster();
+        fetchMaterials();
+        fetchPosts();
+    }, [id]);
+
     if (loading) return <div className="loading">Loading...</div>;
 
     if (!disaster) return <div className="error">No disaster found!</div>;
@@ -149,6 +259,7 @@ const DisasterDetail = () => {
     return (
         <div className="disaster-detail">
             <Toaster />
+            <div className="disaster-sect">
             <h2 className="disaster-title"><Link to='/dis'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M20 0H0v20h20zm-7.354 14.166-1.389 1.439-5.737-5.529 5.729-5.657 1.4 1.424-4.267 4.215z" /></svg> </Link> {disaster.name}</h2>
             <div className="disaster-info">
                 <p><strong>State:</strong> {disaster.state}</p>
@@ -220,6 +331,48 @@ const DisasterDetail = () => {
                     <button className="volunteer-button" onClick={handlePayments}>Make a Payment</button>
                 </div>
             )}
+            </div>
+
+            <div className="posts-section">
+                <h3>Posts Related to this Disaster</h3>
+                <ul className="posts-list">
+                    {posts.map(post => (
+                        <li key={post._id} className="post-item">
+                            <h4>{post.title}</h4>
+                            <h6>{post.username}</h6>
+                            <p>{post.disc}</p>
+                            {post.imageUrl && <img src={post.imageUrl} alt={post.title} className="post-image" />}
+                            {(user._id === post.userId || user.isAdmin) && (
+                                <button onClick={() => handleDeletePost(post._id)} className="delete-post-button">Delete Post</button>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+                
+                <form onSubmit={handleSubmitPost} className="post-form">
+                    <input
+                        type="text"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        placeholder="Post Title"
+                        className="post-input"
+                    />
+                    <textarea
+                        value={desc}
+                        onChange={(e) => setDesc(e.target.value)}
+                        placeholder="Post Description"
+                        className="post-input"
+                    />
+                    <input
+                        type="file"
+                        onChange={(e) => setPostImage(e.target.files[0])}
+                        className="post-input"
+                    />
+                    <button type="submit" className="add-post-button">Create Post</button>
+                </form>
+
+                
+            </div>
         </div>
     );
 };
