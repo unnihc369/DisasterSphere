@@ -18,6 +18,13 @@ import AddDisaster from './pages/AddDisaster';
 import NonVerifiedDisasters from './components/NonVerifiedDisasters';
 import DisasterDetail from './components/DisasterDetail';
 import VerifiedDisasters from './components/VerifiedDisasters';
+import DisasterView from './components/DisasterView';
+import Earthquake from './components/Earthquake';
+import Flood from './components/Flood';
+import Cyclone from './components/Cyclone';
+import Wildfire from './components/Wildfire';
+import Tsunami from './components/Tsunami';
+import Landslide from './components/Landslide';
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -40,6 +47,13 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/nondis" element={<NonVerifiedDisasters />} />
           <Route path="/disaster/:id" element={<DisasterDetail />} />
+          <Route path="/disasterview" exact component={DisasterView} />
+                <Route path="/earthquake" component={Earthquake} />
+                <Route path="/flood" component={Flood} />
+                <Route path="/cyclone" component={Cyclone} />
+                <Route path="/wildfire" component={Wildfire} />
+                <Route path="/tsunami" component={Tsunami} />
+                <Route path="/landslide" component={Landslide} />
         </Routes>
         <Footer />
       </div>
