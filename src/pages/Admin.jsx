@@ -7,14 +7,13 @@ import './Admin.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
 import statesData from './states.json'; 
-import NonVerifiedDisasters from '../components/NonVerifiedDisasters';
-import VerifiedDisasters from '../components/VerifiedDisasters';
 
 const Admin = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
     const users = useSelector((state) => state.users.users);
     const status = useSelector((state) => state.users.status);
+    const disasters = useSelector((state) => state.disasters.disasters);
 
     const [selectedState, setSelectedState] = useState('');
     const [selectedCity, setSelectedCity] = useState('');
@@ -85,6 +84,7 @@ const Admin = () => {
     };
 
     return (
+        <div className="contain">
         <div className="admin-panel">
             <Toaster />
             {(!user.isAdmin || !user) && <Navigate to="/login" replace />}
@@ -92,10 +92,10 @@ const Admin = () => {
             <div className="stats">
                 <StatsCard title="Total Users" count={users.length} />
                 <StatsCard title="Total Admins" count={adminCount} />
-                <StatsCard title="Total Posts" count={20} />
+                <StatsCard title="Total Disaters" count={disasters.length} />
             </div>
             <UserList users={users} makeAdmin={makeAdmin} />
-
+        </div>
             <div className="alert-form">
                 <h2>Send Alerts to Users</h2>
                 <form onSubmit={handleSubmit}>

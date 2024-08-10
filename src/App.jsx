@@ -3,14 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import ContactUs from './components/ContactUs';
 import FAQ from './components/FAQ';
 import AboutUs from './components/AboutUs';
-import Grid from './components/Grid';
 import Profile from './components/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import GridBuilder from './components/GridBuilder';
 import { Provider, useSelector } from 'react-redux';
 import VerifyEmail from './pages/VerifyEmail';
 import Admin from './pages/Admin';
@@ -39,10 +36,8 @@ function App() {
           <Route path="/adddisaster" element={user ? <AddDisaster /> : <Navigate to="/login" replace />} />
           <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/login" replace />} />
           <Route path="/dis" element={user ? <VerifiedDisasters /> : <Navigate to="/login" replace />} />
-          <Route path="/faq" element={<FAQ />} />
           <Route path="/" element={<AboutUs />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
-          <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/nondis" element={<NonVerifiedDisasters />} />

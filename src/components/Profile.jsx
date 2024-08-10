@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Weather from './Weather';
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -9,7 +10,6 @@ const Profile = () => {
     const [location, setLocation] = useState({ latitude: null, longitude: null });
     const [error, setError] = useState(null);
 
-    // Redirect to login if user is not logged in
     useEffect(() => {
         if (!user) {
             navigate('/login');
@@ -44,28 +44,13 @@ const Profile = () => {
                     <h1>{user.name}</h1>
                 </div>
                 <div className="profile-info">
-                    <p><strong>Bio:</strong> Developer, Tech Enthusiast, Coffee Lover.</p>
-                    <p><strong>Location:</strong> New York, USA</p>
-                    <p><strong>Joined:</strong> January 2021</p>
+                    <p><strong>State:</strong> {user.state}</p>
+                    <p><strong>City:</strong>{user.city}</p>
+                    <p><strong>Joined:</strong> {new Date(user.createdAt).toDateString()}</p>
                     <p><strong>Email:</strong> {user.email}</p>
                 </div>
             </div>
-            <div className="profile-content">
-                <h2>Recent Activities</h2>
-                <div className="activity">
-                    <p>John commented on a post: "Great article, thanks for sharing!"</p>
-                    <span>2 hours ago</span>
-                </div>
-                <div className="activity">
-                    <p>John liked a photo.</p>
-                    <span>5 hours ago</span>
-                </div>
-                <div className="activity">
-                    <p>John updated his profile picture.</p>
-                    <span>1 day ago</span>
-                </div>
-            </div>
-            <div className="location-info">
+            {/* <div className="location-info">
                 <h2>Your Location</h2>
                 {error && <p className="error-message">Error: {error}</p>}
                 {location.latitude && location.longitude ? (
@@ -76,7 +61,8 @@ const Profile = () => {
                 ) : (
                     <p>Fetching location...</p>
                 )}
-            </div>
+            </div> */}
+            <Weather latitude={location.latitude} longitude={location.longitude}/>
         </div>
     );
 };

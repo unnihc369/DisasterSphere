@@ -8,12 +8,12 @@ const Footer = () => {
             <div className="footer-container">
                 <div className="footer-section">
                     <h4>About Us</h4>
-                    <p>We are a team of dedicated professionals committed to providing quality service.</p>
+                    <p>Enhancing disaster preparedness with real-time</p><p> alerts, community support, and educational</p><p> resources.</p>
                 </div>
                 <div className="footer-section">
                     <h4>Contact Us</h4>
-                    <p>Email: info@example.com</p>
-                    <p>Phone: (123) 456-7890</p>
+                    <p>Email: disastersphere@email.com</p>
+                    <p>Phone: +91 80808 08080</p>
                 </div>
                 <div className="footer-section">
                     <h4>Follow Us</h4>
@@ -25,7 +25,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} DisasterSphere. All rights reserved.</p>
             </div>
         </footer>
     );

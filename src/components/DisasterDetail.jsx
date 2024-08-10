@@ -1,5 +1,6 @@
+// src/components/DisasterDetail.js
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { volunteerSuccess } from '../redux/userSlice';
@@ -13,6 +14,7 @@ const DisasterDetail = () => {
     const [loading, setLoading] = useState(true);
     const [itemName, setItemName] = useState('');
     const [quantityNeeded, setQuantityNeeded] = useState(0);
+    const [paymentLink, setPaymentLink] = useState('');
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
 
@@ -109,6 +111,20 @@ const DisasterDetail = () => {
         }
     };
 
+    const handlePayments=async()=>{
+        try {
+            const response = await axios.post('http://localhost:5000/dis/success', {
+                disasterId: disaster._id,
+            });
+            console.log(response);
+            window.location.href = "https://buy.stripe.com/test_cN214faWn1R69j2eUU";
+        } catch (error) {
+            console.error('Payment failed:', error);
+            toast.error('Failed to initiate payment. Please try again.');
+        }
+    }
+
+
     if (loading) return <div className="loading">Loading...</div>;
 
     if (!disaster) return <div className="error">No disaster found!</div>;
@@ -124,57 +140,66 @@ const DisasterDetail = () => {
                 <p><strong>City:</strong> {disaster.city}</p>
                 <p><strong>Description:</strong> {disaster.disc}</p>
                 <p><strong>Place:</strong> {disaster.Place}</p>
+                <p><strong>Amount Raised:</strong> ₹{disaster.amount}</p> 
             </div>
             {!hasVolunteered && (
                 <button onClick={handleVolunteer} className="volunteer-button">
                     Volunteer for this Disaster
                 </button>
             )}
-            {hasVolunteered && <div className="materials-section">
-                <h3>Required Materials</h3>
-                <ul className="materials-list">
-                    {materials.map(material => (
-                        <li key={material._id} className="material-item">
-                            <p>{material.itemName} - Quantity Needed: {material.quantityNeeded}</p>
-                            {!material.fulfilled ? (
-                                <>
-                                    <button onClick={() => handleAcceptMaterial(material._id)} className="accept-button">
-                                        Accept to Donate
-                                    </button>
-                                    <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
-                                        Delete
-                                    </button>
-                                </>
-                            ) : (
-                                <>
-                                    <p className="fulfilled-status">Accepted by: {material.volunteer ? material.volunteer : 'Unknown'}</p>
-                                    {user.isAdmin && <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
-                                        Delete
-                                    </button>}
-                                </>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-                <div className="add-material">
-                    <h4>Add New Material Requirement</h4>
-                    <input
-                        type="text"
-                        value={itemName}
-                        onChange={(e) => setItemName(e.target.value)}
-                        placeholder="Item Name"
-                        className="material-input"
-                    />
-                    <input
-                        type="number"
-                        value={quantityNeeded}
-                        onChange={(e) => setQuantityNeeded(Number(e.target.value))}
-                        placeholder="Quantity Needed"
-                        className="material-input"
-                    />
-                    <button onClick={handleAddMaterial} className="add-material-button">Add Material</button>
+            {
+                hasVolunteered && <p className="">You are Volunteering</p>
+            }
+            {(hasVolunteered || user.isAdmin) && (
+                <div className="materials-section">
+                    <h3>Required Materials</h3>
+                    <ul className="materials-list">
+                        {materials.map(material => (
+                            <li key={material._id} className="material-item">
+                                <p>{material.itemName} - Quantity Needed: {material.quantityNeeded}</p>
+                                {!material.fulfilled ? (
+                                    <>
+                                        <button onClick={() => handleAcceptMaterial(material._id)} className="accept-button">
+                                            Accept to Donate
+                                        </button>
+                                        <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
+                                            Delete
+                                        </button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="fulfilled-status">Accepted by: {material.volunteer ? material.volunteer : 'Unknown'}</p>
+                                        {user.isAdmin && (
+                                            <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
+                                                Delete
+                                            </button>
+                                        )}
+                                    </>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                    {user.isAdmin && <div className="add-material">
+                        <h4>Add New Material Requirement</h4>
+                        <input
+                            type="text"
+                            value={itemName}
+                            onChange={(e) => setItemName(e.target.value)}
+                            placeholder="Item Name"
+                            className="material-input"
+                        />
+                        <input
+                            type="number"
+                            value={quantityNeeded}
+                            onChange={(e) => setQuantityNeeded(Number(e.target.value))}
+                            placeholder="Quantity Needed"
+                            className="material-input"
+                        />
+                        <button onClick={handleAddMaterial} className="add-material-button">Add Material</button>
+                    </div>}
+                    <button className="volunterr-button" onClick={()=>{handlePayments()}}>Make a Payment</button>
                 </div>
-            </div>}
+            )}
         </div>
     );
 };

@@ -25,7 +25,7 @@ const Navbar = () => {
         <div>
             <Toaster />
             <nav className="navbar">
-                <div className="logo">Logo</div>
+                <Link to='/'><div className="logo">DisasterSphere</div></Link>
                 <div className="menu-icon" onClick={toggleSidebar}>
                     &#9776;
                 </div>
@@ -39,8 +39,9 @@ const Navbar = () => {
                         </>
                     ) : (
                         <>
+                            <Link to='/disasterview'><li>Edu</li></Link>
+                            <Link to='/adddisaster'><li>Add Disaster</li></Link>
                             <Link to='/dis'><li>Disasters</li></Link>
-                            <Link to='/nondis'><li>Non Verified Disasters</li></Link>
                             <Link to='/profile'><li>Profile</li></Link>
                             <li onClick={handleLogout}>Logout</li>
                         </>
@@ -54,16 +55,18 @@ const Navbar = () => {
                 </div>
                 <ul className="sidebar-links">
                     <Link to='/'><li onClick={toggleSidebar}>Home</li></Link>
-                    <Link to='/about-us'><li onClick={toggleSidebar}>About</li></Link>
-                    <Link to='/faq'><li onClick={toggleSidebar}>Faq</li></Link>
-                    <Link to='/contact-us'><li onClick={toggleSidebar}>Contact</li></Link>
+                    {user && (user.isAdmin && <Link to='/admin'><li>Admin</li></Link>)}
                     {!user ? (
                         <>
-                            <Link to='/login'><li onClick={toggleSidebar}>Login</li></Link>
-                            <Link to='/signup'><li onClick={toggleSidebar}>Sign Up</li></Link>
+                            <Link to='/login'><li>Login</li></Link>
+                            <Link to='/signup'><li>Sign Up</li></Link>
                         </>
                     ) : (
-                        <li onClick={() => { handleLogout(); toggleSidebar(); }}>Logout</li>
+                        <>
+                            <Link to='/dis'><li>Disasters</li></Link>
+                            <Link to='/profile'><li>Profile</li></Link>
+                            <li onClick={handleLogout}>Logout</li>
+                        </>
                     )}
                 </ul>
             </div>

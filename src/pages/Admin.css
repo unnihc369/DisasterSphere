@@ -4,11 +4,16 @@
     padding: 20px;
 }
 
+.contain{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .admin-panel {
-    width: 100%;
-    max-width: 800px;
+    width: 600px;
+    /* max-width: 450px; */
     background: white;
-    margin: 15vh auto;
+    margin: 10vh auto;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -25,7 +30,7 @@
 }
 
 .alert-form {
-    max-width: 600px;
+    width: 500px;
     margin: 20px auto 20px;
     padding: 20px;
     border: 1px solid #ccc;

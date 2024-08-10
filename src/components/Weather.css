@@ -1,0 +1,75 @@
+.app {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: left;
+}
+
+.weather-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.weather-container p {
+    font-size: 18px;
+    color: #555;
+    margin: 5px 0;
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    width: calc(100% - 24px);
+    box-sizing: border-box;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+    color: #aaa;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.loading,
+.error {
+    font-size: 18px;
+    color: #ff6b6b;
+}

@@ -14,10 +14,6 @@ const FAQ = () => {
             answer: "DisasterSphere integrates real-time disaster alerts, volunteer networks, community reporting, and educational modules to enhance disaster preparedness and response."
         },
         {
-            question: "How can I use the DisasterSphere app?",
-            answer: "Simply sign up on our platform, explore available features, and access tools for disaster alerts, volunteering, reporting, and more based on your needs."
-        },
-        {
             question: "How can I volunteer through DisasterSphere?",
             answer: "Sign up as a volunteer on our platform, join our virtual volunteer network, and select tasks or projects you’d like to participate in."
         },
@@ -49,18 +45,6 @@ const FAQ = () => {
             question: "How can I help people affected by disasters?",
             answer: "You can donate, volunteer, or participate in relief efforts organized through our platform to provide support and aid to those in need."
         },
-        {
-            question: "How can I learn about disaster preparedness?",
-            answer: "Explore our educational modules and interactive learning sections to gain knowledge and skills related to disaster preparedness and response."
-        },
-        {
-            question: "Where can I find state-wise disaster links?",
-            answer: "Our platform provides links and resources for each state, offering information on state-specific disaster preparedness and response guidelines."
-        },
-        {
-            question: "What should I do if I need immediate help?",
-            answer: "Contact our emergency communication hub through the app, which connects you with local support services and emergency responders."
-        }
     ];
 
     return (
