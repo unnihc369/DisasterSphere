@@ -3,14 +3,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Async thunk to fetch users
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-    const response = await fetch('http://localhost:5000/user/users');
+    const response = await fetch('/user/users');
     const data = await response.json();
     return data;
 });
 
 // Async thunk to update a user's admin status
 export const updateUserAdminStatus = createAsyncThunk('users/updateUserAdminStatus', async ({ id, isAdmin }) => {
-    const response = await fetch(`http://localhost:5000/user/${id}`, {
+    const response = await fetch(`/user/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const updateUserAdminStatus = createAsyncThunk('users/updateUserAdminStat
         body: JSON.stringify({ isAdmin }),
     });
     const data = await response.json();
-    return data.user; // Assuming the updated user is returned in data.user
+    return data.user;
 });
 
 const allUsersSlice = createSlice({

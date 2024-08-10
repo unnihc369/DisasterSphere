@@ -1,0 +1,98 @@
+.disaster-detail {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
+
+.disaster-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.disaster-info {
+    margin-bottom: 20px;
+}
+
+.volunteer-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.volunteer-status {
+    color: #17a2b8;
+}
+
+.materials-section {
+    margin-top: 30px;
+}
+
+.materials-list {
+    list-style: none;
+    padding: 0;
+}
+
+.material-item {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.accept-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.fulfilled-status {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.add-material {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+}
+
+.material-input {
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 45%;
+}
+
+.add-material-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.loading {
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+}
+
+.error {
+    text-align: center;
+    font-size: 18px;
+    color: #dc3545;
+}

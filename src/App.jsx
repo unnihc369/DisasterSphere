@@ -14,6 +14,10 @@ import GridBuilder from './components/GridBuilder';
 import { Provider, useSelector } from 'react-redux';
 import VerifyEmail from './pages/VerifyEmail';
 import Admin from './pages/Admin';
+import AddDisaster from './pages/AddDisaster';
+import NonVerifiedDisasters from './components/NonVerifiedDisasters';
+import DisasterDetail from './components/DisasterDetail';
+import VerifiedDisasters from './components/VerifiedDisasters';
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -25,15 +29,17 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/profile" element={user ? <Profile /> : <Navigate to="/login" replace />} />
-          <Route path="/grid" element={isAdmin ? <Grid /> : <Navigate to="/login" replace />}/>
+          <Route path="/adddisaster" element={user ? <AddDisaster /> : <Navigate to="/login" replace />}/>
           <Route path="/admin" element={isAdmin ? <Admin /> : <Navigate to="/login" replace />} />
-          <Route path="/gridbuilder" element={<GridBuilder />} />
+          <Route path="/dis" element={user ? <VerifiedDisasters /> : <Navigate to="/login" replace />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/" element={<AboutUs />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/nondis" element={<NonVerifiedDisasters />} />
+          <Route path="/disaster/:id" element={<DisasterDetail />} />
         </Routes>
         <Footer />
       </div>

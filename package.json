@@ -2,6 +2,7 @@
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
+  "proxy":"https://disaster-sphere-backend.vercel.app/",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +12,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
+    "axios": "^1.7.3",
     "firebase": "^10.12.5",
     "js-cookie": "^3.0.5",
     "react": "^18.3.1",

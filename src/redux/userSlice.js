@@ -1,3 +1,4 @@
+// src/redux/userSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import Cookies from 'js-cookie';
 
@@ -51,9 +52,19 @@ const userSlice = createSlice({
             Cookies.remove('token');
             Cookies.remove('user');
         },
+        volunteerSuccess: (state, action) => {
+            const disasterId = action.payload;
+            state.user.volunteeredDisasters = [...state.user.volunteeredDisasters, disasterId];
+
+            Cookies.set('user', JSON.stringify(state.user), {
+                expires: 1, // Expires in 1 day
+                secure: true,
+                sameSite: 'strict'
+            });
+        }
     },
 });
 
-export const { loginSuccess, logout } = userSlice.actions;
+export const { loginSuccess, logout, volunteerSuccess } = userSlice.actions;
 
 export default userSlice.reducer;

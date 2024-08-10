@@ -1,0 +1,34 @@
+.non-verified-disasters {
+    padding: 20px;
+}
+
+.non-verified-disasters h2 {
+    margin-bottom: 20px;
+}
+
+.non-verified-disasters table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.non-verified-disasters th, .non-verified-disasters td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.non-verified-disasters th {
+    background-color: #f2f2f2;
+}
+
+.non-verified-disasters button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.non-verified-disasters button:hover {
+    background-color: #45a049;
+}

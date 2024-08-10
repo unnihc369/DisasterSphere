@@ -7,6 +7,8 @@ import './Admin.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
 import statesData from './states.json'; 
+import NonVerifiedDisasters from '../components/NonVerifiedDisasters';
+import VerifiedDisasters from '../components/VerifiedDisasters';
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -46,7 +48,6 @@ const Admin = () => {
         setSelectedState(stateName);
         setSelectedCity('');
 
-        // Find the selected state and update the cities
         const selectedStateData = statesData[stateName];
         if (selectedStateData) {
             setCities(selectedStateData);
@@ -56,7 +57,7 @@ const Admin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/user/alert', {
+            const response = await fetch('/user/alert', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -153,6 +154,8 @@ const Admin = () => {
                     <button type="submit">Send Alert</button>
                 </form>
             </div>
+            <NonVerifiedDisasters/>
+            <VerifiedDisasters/>
         </div>
     );
 };
