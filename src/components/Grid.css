@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 40px);
+    gap: 0px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.obstacle {
+    background-color: #333;
+    color: #fff;
+}
+
+.start {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.parking {
+    background-color: #f0ad4e;
+    color: #fff;
+}
+
+.occupied {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.empty {
+    background-color: #fff;
+}
+
+.path {
+    background-color: #5bc0de;
+    color: #fff;
+}
+
+input {
+    margin-top: 10px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}

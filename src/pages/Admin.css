@@ -1,0 +1,63 @@
+.app {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.admin-panel {
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    margin: 15vh auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.admin-panel h1 {
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.alert-form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.alert-form .form-group {
+    margin-bottom: 15px;
+}
+
+.alert-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.alert-form input,
+.alert-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.alert-form button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.alert-form button:hover {
+    background-color: #218838;
+}

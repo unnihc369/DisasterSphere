@@ -1,0 +1,33 @@
+/* src/components/UserList.css */
+.user-list {
+    margin-top: 20px;
+}
+
+.user-list h2 {
+    margin-bottom: 10px;
+}
+
+.user-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.user-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.user-list button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-list button:hover {
+    background: #0056b3;
+}

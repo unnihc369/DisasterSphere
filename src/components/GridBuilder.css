@@ -1,0 +1,60 @@
+.grid {
+    display: grid;
+    gap: 2px;
+    /* Space between cells */
+    margin-top: 20px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    /* Light grey border */
+    box-sizing: border-box;
+    /* Include border in element's total width and height */
+    cursor: pointer;
+    font-size: 14px;
+    /* Adjust font size as needed */
+}
+
+.start {
+    background-color: #4CAF50;
+    /* Green background for start point */
+    color: #fff;
+    /* White text color */
+}
+
+.parking {
+    background-color: #f0ad4e;
+    /* Orange background for parking slots */
+    color: #fff;
+    /* White text color */
+}
+
+.obstacle {
+    background-color: #333;
+    /* Dark grey for obstacles */
+    color: #fff;
+    /* White text color */
+}
+
+.empty {
+    background-color: #fff;
+    /* White background for empty cells */
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+input {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+}

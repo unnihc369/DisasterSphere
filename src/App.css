@@ -1,0 +1,108 @@
+*{
+  border: 0;
+  margin: 0;
+}
+
+.calendar {
+  width: 300px;
+  margin: auto;
+  background-color: #fff;
+  padding: 4px;
+  border-radius: 10px;
+  border: 2px solid #EC5F70;
+}
+
+button {
+  border: 0;
+  background-color: #fff;
+  color: #EC5F70;
+  cursor: pointer;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #ccc;
+}
+
+.currentMonth {
+  font-weight: bold;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  color: rgba(103, 100, 255, 1);
+  cursor: pointer;
+}
+
+.disabled {
+  color: #ccc;
+}
+
+.currentDay {
+  border-radius: 50%;
+  border: 2px solid rgb(154, 255, 2);
+}
+
+.weekday {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+}
+
+.day:nth-child(7n) {
+  color: red;
+}
+
+.rowcalend {
+  margin-top: 4px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.cancel {
+  border: 2px solid #EC5F70;
+  padding: 4px 7px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.save {
+  border: 2px solid #EC5F70;
+  background-color: #EC5F70;
+  color: #fff;
+  padding: 4px 7px;
+  border-radius: 7px;
+  font-weight: bold;
+}
+
+.Modal {
+  padding: 5px;
+}
+
+textarea {
+  width: 100%;
+  height: 117px;
+  border: 0;
+}
+
+textarea:focus {
+  width: 100%;
+  outline: none;
+}
