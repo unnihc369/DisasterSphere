@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import statesData from './states.json'; // Adjust the path as necessary
 import toast, { Toaster } from 'react-hot-toast';
 import './AddDisaster.css'
+import { Link } from 'react-router-dom';
 
 const AddDisaster = () => {
     const user = useSelector((state) => state.user.user); 
@@ -36,6 +37,7 @@ const AddDisaster = () => {
                     disc,
                     Place: place,
                     userId: user._id, 
+                    ...(user.isAdmin ?{ isVerified: true }:{isVerified:false})
                 }),
             });
 
@@ -122,6 +124,7 @@ const AddDisaster = () => {
                         required
                     />
                 </div>
+                <p className="margin-bottom">*Check the <Link to='/nondis'>Non Verified disasters</Link>*</p>
                 <button type="submit">Add Disaster</button>
             </form>
         </div>

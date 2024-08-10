@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Weather from './Weather';
 
 const Profile = () => {
@@ -45,24 +45,26 @@ const Profile = () => {
                 </div>
                 <div className="profile-info">
                     <p><strong>State:</strong> {user.state}</p>
-                    <p><strong>City:</strong>{user.city}</p>
+                    <p><strong>City:</strong> {user.city}</p>
                     <p><strong>Joined:</strong> {new Date(user.createdAt).toDateString()}</p>
                     <p><strong>Email:</strong> {user.email}</p>
                 </div>
             </div>
-            {/* <div className="location-info">
-                <h2>Your Location</h2>
-                {error && <p className="error-message">Error: {error}</p>}
-                {location.latitude && location.longitude ? (
-                    <p>
-                        <b>Latitude:</b> {location.latitude}<br />
-                        <b>Longitude:</b> {location.longitude}
-                    </p>
+
+            <Weather latitude={location.latitude} longitude={location.longitude} />
+
+            <div className="profile-content">
+                <h2>Your Volunteered Disasters</h2>
+                {user.volunteeredDisasters.length > 0 ? (
+                    user.volunteeredDisasters.map((disasterId) => (
+                        <Link key={disasterId} to={`/disaster/${disasterId}`} className="activity">
+                            <p>Disaster ID: {disasterId}</p>
+                        </Link>
+                    ))
                 ) : (
-                    <p>Fetching location...</p>
+                    <p>You have not volunteered for any disasters yet.</p>
                 )}
-            </div> */}
-            <Weather latitude={location.latitude} longitude={location.longitude}/>
+            </div>
         </div>
     );
 };

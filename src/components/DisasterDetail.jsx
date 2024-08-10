@@ -1,4 +1,3 @@
-// src/components/DisasterDetail.js
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -14,7 +13,6 @@ const DisasterDetail = () => {
     const [loading, setLoading] = useState(true);
     const [itemName, setItemName] = useState('');
     const [quantityNeeded, setQuantityNeeded] = useState(0);
-    const [paymentLink, setPaymentLink] = useState('');
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
 
@@ -66,6 +64,7 @@ const DisasterDetail = () => {
                 disasterId: id,
                 itemName,
                 quantityNeeded,
+                isVerified: user.isAdmin 
             });
 
             if (response.status === 201) {
@@ -111,7 +110,24 @@ const DisasterDetail = () => {
         }
     };
 
-    const handlePayments=async()=>{
+    const handleVerifyMaterial = async (materialId) => {
+        try {
+            const response = await axios.put(`http://localhost:5000/mat/verify/${materialId}`);
+
+            if (response.status === 200) {
+                // Update the state with the newly verified material
+                setMaterials(materials.map(material =>
+                    material._id === materialId ? { ...material, isVerified: true } : material
+                ));
+                toast.success('Material verified successfully!');
+            }
+        } catch (error) {
+            console.error('Failed to verify material:', error);
+            toast.error('Failed to verify material.');
+        }
+    };
+
+    const handlePayments = async () => {
         try {
             const response = await axios.post('http://localhost:5000/dis/success', {
                 disasterId: disaster._id,
@@ -124,7 +140,6 @@ const DisasterDetail = () => {
         }
     }
 
-
     if (loading) return <div className="loading">Loading...</div>;
 
     if (!disaster) return <div className="error">No disaster found!</div>;
@@ -134,52 +149,57 @@ const DisasterDetail = () => {
     return (
         <div className="disaster-detail">
             <Toaster />
-            <h2 className="disaster-title">{disaster.name}</h2>
+            <h2 className="disaster-title"><Link to='/dis'><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><path d="M20 0H0v20h20zm-7.354 14.166-1.389 1.439-5.737-5.529 5.729-5.657 1.4 1.424-4.267 4.215z" /></svg> </Link> {disaster.name}</h2>
             <div className="disaster-info">
                 <p><strong>State:</strong> {disaster.state}</p>
                 <p><strong>City:</strong> {disaster.city}</p>
                 <p><strong>Description:</strong> {disaster.disc}</p>
                 <p><strong>Place:</strong> {disaster.Place}</p>
-                <p><strong>Amount Raised:</strong> ₹{disaster.amount}</p> 
+                <p><strong>Amount Raised:</strong> ₹{disaster.amount}</p>
             </div>
             {!hasVolunteered && (
                 <button onClick={handleVolunteer} className="volunteer-button">
                     Volunteer for this Disaster
                 </button>
             )}
-            {
-                hasVolunteered && <p className="">You are Volunteering</p>
-            }
+            {hasVolunteered && <p className="">You are Volunteering</p>}
             {(hasVolunteered || user.isAdmin) && (
                 <div className="materials-section">
                     <h3>Required Materials</h3>
                     <ul className="materials-list">
-                        {materials.map(material => (
-                            <li key={material._id} className="material-item">
-                                <p>{material.itemName} - Quantity Needed: {material.quantityNeeded}</p>
-                                {!material.fulfilled ? (
-                                    <>
-                                        <button onClick={() => handleAcceptMaterial(material._id)} className="accept-button">
-                                            Accept to Donate
-                                        </button>
-                                        <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
-                                            Delete
-                                        </button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <p className="fulfilled-status">Accepted by: {material.volunteer ? material.volunteer : 'Unknown'}</p>
-                                        {user.isAdmin && (
+                        {materials
+                            .filter(material => user.isAdmin || material.isVerified) // Only show verified materials to volunteers
+                            .map(material => (
+                                <li key={material._id} className="material-item">
+                                    <p>{material.itemName} - Quantity Needed: {material.quantityNeeded}</p>
+                                    {!material.fulfilled ? (
+                                        <>
+                                            <button onClick={() => handleAcceptMaterial(material._id)} className="accept-button">
+                                                Accept to Donate
+                                            </button>
                                             <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
                                                 Delete
                                             </button>
-                                        )}
-                                    </>
-                                )}
-                            </li>
-                        ))}
+                                            {user.isAdmin && !material.isVerified && (
+                                                <button onClick={() => handleVerifyMaterial(material._id)} className="verify-button">
+                                                    Verify
+                                                </button>
+                                            )}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <p className="fulfilled-status">Accepted by: {material.volunteer ? material.volunteer : 'Unknown'}</p>
+                                            {user.isAdmin && (
+                                                <button onClick={() => handleDeleteMaterial(material._id)} className="delete-button">
+                                                    Delete
+                                                </button>
+                                            )}
+                                        </>
+                                    )}
+                                </li>
+                            ))}
                     </ul>
-                    {user.isAdmin && <div className="add-material">
+                    <div className="add-material">
                         <h4>Add New Material Requirement</h4>
                         <input
                             type="text"
@@ -196,8 +216,8 @@ const DisasterDetail = () => {
                             className="material-input"
                         />
                         <button onClick={handleAddMaterial} className="add-material-button">Add Material</button>
-                    </div>}
-                    <button className="volunterr-button" onClick={()=>{handlePayments()}}>Make a Payment</button>
+                    </div>
+                    <button className="volunteer-button" onClick={handlePayments}>Make a Payment</button>
                 </div>
             )}
         </div>

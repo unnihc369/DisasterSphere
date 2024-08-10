@@ -7,6 +7,10 @@
     background-color: #f9f9f9;
 }
 
+.margin-bottom{
+    margin-bottom: 10px;
+}
+
 .form-group {
     margin-bottom: 15px;
 }

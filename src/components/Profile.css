@@ -85,17 +85,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.activity:hover {
+    background-color: #e0e0e0;
 }
 
 .activity p {
     margin: 0;
     font-size: 1.1em;
     color: #555;
-}
-
-.activity span {
-    font-size: 0.9em;
-    color: #999;
 }
 
 @media (max-width: 768px) {
