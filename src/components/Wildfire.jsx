@@ -10,7 +10,7 @@ const Wildfire = () => {
 
             <section className="disaster-section">
                 <div className="disaster-image">
-                    <img src="wildfire-image-url.jpg" alt="Wildfire" />
+                    <img src="https://th.bing.com/th/id/OIP.ws5F4IRqkWPmfJ_C-3BKVQHaE7?w=2200&h=1464&rs=1&pid=ImgDetMain" alt="Wildfire" />
                 </div>
                 <div className="disaster-content">
                     <h2>What is a Wildfire?</h2>

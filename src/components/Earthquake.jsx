@@ -10,7 +10,7 @@ const Earthquake = () => {
 
             <section className="disaster-section">
                 <div className="disaster-image">
-                    <img src="earthquake-image-url.jpg" alt="Earthquake" />
+                    <img src="https://www.hindustantimes.com/ht-img/img/2023/02/08/1600x900/turkey_syria_earthquake_1675827422716_1675827423020_1675827423020.JPG" alt="Earthquake" />
                 </div>
                 <div className="disaster-content">
                     <h2>What is an Earthquake?</h2>

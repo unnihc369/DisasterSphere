@@ -10,7 +10,7 @@ const Landslide = () => {
 
             <section className="disaster-section">
                 <div className="disaster-image">
-                    <img src="landslide-image-url.jpg" alt="Landslide" />
+                    <img src="https://video.cgtn.com/news/2022-12-16/Dozens-feared-trapped-in-western-Malaysia-landslide-1fNKyoCevW8/video/7ca33f538bb44630b83ab469975ac2ee/7ca33f538bb44630b83ab469975ac2ee.jpg" alt="Landslide" />
                 </div>
                 <div className="disaster-content">
                     <h2>What is a Landslide?</h2>

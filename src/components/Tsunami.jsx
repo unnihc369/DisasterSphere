@@ -10,7 +10,7 @@ const Tsunami = () => {
 
             <section className="disaster-section">
                 <div className="disaster-image">
-                    <img src="tsunami-image-url.jpg" alt="Tsunami" />
+                    <img src="https://img.freepik.com/free-photo/natural-disaster-concept-with-flood_23-2150385378.jpg?t=st=1723339833~exp=1723343433~hmac=88b4319ad964314b099324b02a6b31faf043b0d66ea7e0b3cd863dceb5df6151&w=1060" alt="Tsunami" />
                 </div>
                 <div className="disaster-content">
                     <h2>What is a Tsunami?</h2>

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Fetch non-verified disasters
 export const fetchNonVerifiedDisasters = createAsyncThunk('disasters/fetchNonVerified', async () => {
-    const response = await fetch('http://localhost:5000/dis/');
+    const response = await fetch('https://disaster-sphere-backend.vercel.app/dis/');
     if (!response.ok) {
         throw new Error('Failed to fetch non-verified disasters');
     }
@@ -12,7 +12,7 @@ export const fetchNonVerifiedDisasters = createAsyncThunk('disasters/fetchNonVer
 
 // Verify a disaster
 export const verifyDisaster = createAsyncThunk('disasters/verify', async (id) => {
-    const response = await fetch(`http://localhost:5000/dis/${id}`, {
+    const response = await fetch(`https://disaster-sphere-backend.vercel.app/dis/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ export const verifyDisaster = createAsyncThunk('disasters/verify', async (id) =>
 
 // Delete a disaster
 export const deleteDisaster = createAsyncThunk('disasters/delete', async (id) => {
-    const response = await fetch(`http://localhost:5000/dis/${id}`, {
+    const response = await fetch(`https://disaster-sphere-backend.vercel.app/dis/${id}`, {
         method: 'DELETE',
     });
     if (!response.ok) {

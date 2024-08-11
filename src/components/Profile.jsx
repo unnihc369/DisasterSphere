@@ -35,7 +35,7 @@ const Profile = () => {
         <div className="profile-container">
             <div className="profile-header">
                 <div className="profile-cover">
-                    <img src="https://img.freepik.com/premium-vector/gym-t-shirt-design-work-hard-beats-talent_142392-1584.jpg?w=826" alt="Cover" className="cover-img" />
+                    <img src="https://disasterherotulsa.com/wp-content/uploads/2023/01/ESR-Disaster-Hero-Logo_FLOOD.svg" alt="Cover" className="cover-img" />
                 </div>
                 <div className="profile-avatar">
                     <img src={user.profileImage ? user.profileImage : "https://static.vecteezy.com/system/resources/previews/005/544/718/non_2x/profile-icon-design-free-vector.jpg"} alt="Avatar" className="avatar-img" />

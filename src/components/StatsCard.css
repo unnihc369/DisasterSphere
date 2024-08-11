@@ -1,4 +1,4 @@
-/* src/components/StatsCard.css */
+
 .stats-card {
     background: #007bff;
     color: white;
@@ -16,5 +16,6 @@
 
 .stats-card p {
     margin: 5px 0 0;
+    color: #fff;
     font-size: 24px;
 }

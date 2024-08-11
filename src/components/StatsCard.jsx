@@ -1,4 +1,4 @@
-// src/components/StatsCard.jsx
+
 import React from 'react';
 import './StatsCard.css';
 

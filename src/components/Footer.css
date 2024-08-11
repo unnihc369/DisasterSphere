@@ -28,14 +28,18 @@ body {
     min-width: 250px;
     margin: 20px 0;
     gap: 20px;
+    color: #fff;
+
 }
 
 .footer-section h4 {
     margin-bottom: 10px;
+    color: #fff;
 }
 
 .footer-section p {
     margin-bottom: 10px;
+    color: #ccc;
 }
 
 .social-icons {
@@ -63,7 +67,9 @@ body {
     text-align: center;
     padding: 10px 20px;
     background-color: #222;
+    color: #fff;
 }
+
 
 @media (max-width: 768px) {
     .footer-container {

@@ -6,7 +6,8 @@ import StatsCard from '../components/StatsCard';
 import './Admin.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
-import statesData from './states.json'; 
+import statesData from './states.json';
+import NonVerifiedDisasters from '../components/NonVerifiedDisasters';
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Admin = () => {
     const [subject, setSubject] = useState('');
     const [message, setMessage] = useState('');
     const [cities, setCities] = useState([]);
+    const [alertType, setAlertType] = useState('yellow');
 
     useEffect(() => {
         if (!user.isAdmin) {
@@ -56,7 +58,7 @@ const Admin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/user/alert', {
+            const response = await fetch('https://disaster-sphere-backend.vercel.app/user/alert', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,6 +68,7 @@ const Admin = () => {
                     city: selectedCity,
                     subject,
                     message,
+                    alertType, 
                 }),
             });
             const data = await response.json();
@@ -74,6 +77,7 @@ const Admin = () => {
                 setSelectedState('');
                 setSelectedCity('');
                 setSubject('');
+                setAlertType('yellow'); 
                 setMessage('');
             } else {
                 toast.error(data.error || 'Failed to send alerts');
@@ -85,17 +89,18 @@ const Admin = () => {
 
     return (
         <div className="contain">
-        <div className="admin-panel">
-            <Toaster />
-            {(!user.isAdmin || !user) && <Navigate to="/login" replace />}
-            <h1>Admin Panel</h1>
-            <div className="stats">
-                <StatsCard title="Total Users" count={users.length} />
-                <StatsCard title="Total Admins" count={adminCount} />
-                <StatsCard title="Total Disaters" count={disasters.length} />
+            <div className="admin-panel">
+                <Toaster />
+                {(!user.isAdmin || !user) && <Navigate to="/login" replace />}
+                <h1>Admin Panel</h1>
+                <div className="stats">
+                    <StatsCard title="Total Users" count={users.length} />
+                    <StatsCard title="Total Admins" count={adminCount} />
+                    <StatsCard title="Total Disaters" count={disasters.length} />
+                </div>
+                <UserList users={users} makeAdmin={makeAdmin} />
+                <NonVerifiedDisasters/>
             </div>
-            <UserList users={users} makeAdmin={makeAdmin} />
-        </div>
             <div className="alert-form">
                 <h2>Send Alerts to Users</h2>
                 <form onSubmit={handleSubmit}>
@@ -130,6 +135,19 @@ const Admin = () => {
                                     {city}
                                 </option>
                             ))}
+                        </select>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="alertType">Alert Type:</label>
+                        <select
+                            id="alertType"
+                            value={alertType}
+                            onChange={(e) => setAlertType(e.target.value)}
+                            required
+                        >
+                            <option value="yellow">Yellow</option>
+                            <option value="orange">Orange</option>
+                            <option value="red">Red</option>
                         </select>
                     </div>
                     <div className="form-group">

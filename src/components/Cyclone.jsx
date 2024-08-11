@@ -10,7 +10,7 @@ const Cyclone = () => {
 
             <section className="disaster-section">
                 <div className="disaster-image">
-                    <img src="cyclone-image-url.jpg" alt="Cyclone" />
+                    <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ia4lQ3m4Wu58/v1/-1x-1.jpg" alt="Cyclone" />
                 </div>
                 <div className="disaster-content">
                     <h2>What is a Cyclone?</h2>

@@ -10,7 +10,7 @@ const Flood = () => {
 
             <section className="disaster-section">
                 <div className="disaster-image">
-                    <img src="flood-image-url.jpg" alt="Flood" />
+                    <img src="https://img.freepik.com/free-photo/natural-disaster-concept-with-flood_23-2150385391.jpg?t=st=1723339917~exp=1723343517~hmac=498e7ebd8949c023f89af6634706da66027541c8f225f4738cad0f15f0d80556&w=1060" alt="Flood" />
                 </div>
                 <div className="disaster-content">
                     <h2>What is a Flood?</h2>
