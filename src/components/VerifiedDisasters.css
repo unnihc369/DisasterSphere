@@ -1,12 +1,13 @@
 .verified-disasters {
-    padding: 40px;
-    margin: 10px 100px 50px;
+    padding: 20px;
+    margin: 10px;
 }
 
 h2 {
     font-size: 24px;
     color: #343a40;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .search-input {
@@ -15,14 +16,16 @@ h2 {
     border-radius: 4px;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
     font-size: 16px;
+    display: block;
 }
 
 .disaster-cards {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .disaster-card {
@@ -33,6 +36,7 @@ h2 {
     width: 100%;
     max-width: 300px;
     transition: transform 0.3s;
+    margin: 0 auto;
 }
 
 .disaster-card:hover {
@@ -47,12 +51,14 @@ h2 {
 
 .disaster-card p {
     margin: 5px 0;
+    font-size: 14px;
 }
 
 .card-buttons {
     margin-top: 15px;
     display: flex;
     justify-content: space-between;
+    gap: 10px;
 }
 
 .view-button, .delete-button {
@@ -61,6 +67,7 @@ h2 {
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
+    /* width: 48%; */
 }
 
 .view-button {
@@ -81,4 +88,48 @@ h2 {
 
 .delete-button:hover {
     background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .verified-disasters {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .disaster-cards {
+        gap: 15px;
+    }
+
+    .disaster-card {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .card-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .view-button, .delete-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    .disaster-card h3 {
+        font-size: 18px;
+    }
+
+    .disaster-card p {
+        font-size: 13px;
+    }
+
+    .verified-disasters {
+        padding: 10px;
+        margin: 5px;
+    }
 }

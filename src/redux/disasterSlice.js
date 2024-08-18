@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Fetch non-verified disasters
 export const fetchNonVerifiedDisasters = createAsyncThunk('disasters/fetchNonVerified', async () => {
     const response = await fetch('https://disaster-sphere-backend.vercel.app/dis/');
     if (!response.ok) {
@@ -10,7 +9,6 @@ export const fetchNonVerifiedDisasters = createAsyncThunk('disasters/fetchNonVer
     return data;
 });
 
-// Verify a disaster
 export const verifyDisaster = createAsyncThunk('disasters/verify', async (id) => {
     const response = await fetch(`https://disaster-sphere-backend.vercel.app/dis/${id}`, {
         method: 'PUT',
@@ -26,7 +24,6 @@ export const verifyDisaster = createAsyncThunk('disasters/verify', async (id) =>
     return data;
 });
 
-// Delete a disaster
 export const deleteDisaster = createAsyncThunk('disasters/delete', async (id) => {
     const response = await fetch(`https://disaster-sphere-backend.vercel.app/dis/${id}`, {
         method: 'DELETE',

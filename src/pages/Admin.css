@@ -1,19 +1,24 @@
 .app {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     padding: 20px;
+    gap: 30px;
 }
 
-.contain{
+.contain {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
 }
 
 .admin-panel {
-    width: 600px;
-    /* max-width: 450px; */
+    width: 90%;
+    max-width: 600px;
     background: white;
-    margin: 10vh auto;
+    margin: 5vh auto;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -26,12 +31,14 @@
 .stats {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
 .alert-form {
-    width: 500px;
-    margin: 20px auto 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 5vh auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -48,11 +55,13 @@
 }
 
 .alert-form input,
-.alert-form textarea {
-    width: 80vw;
+.alert-form textarea,
+.alert-form select {
+    width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .alert-form button {
@@ -62,8 +71,47 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
 }
 
 .alert-form button:hover {
     background-color: #218838;
+}
+
+@media (max-width: 768px) {
+    .stats {
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .admin-panel {
+        width: 95%;
+        margin: 5vh auto;
+    }
+
+    .alert-form {
+        width: 95%;
+        margin: 5vh auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-panel {
+        padding: 15px;
+    }
+
+    .alert-form {
+        padding: 15px;
+    }
+
+    .alert-form input,
+    .alert-form textarea,
+    .alert-form select {
+        font-size: 14px;
+    }
+
+    .alert-form button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
 }

@@ -1,14 +1,11 @@
-// src/slices/allUsersSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Async thunk to fetch users
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
     const response = await fetch('https://disaster-sphere-backend.vercel.app/user/users');
     const data = await response.json();
     return data;
 });
 
-// Async thunk to update a user's admin status
 export const updateUserAdminStatus = createAsyncThunk('users/updateUserAdminStatus', async ({ id, isAdmin }) => {
     const response = await fetch(`https://disaster-sphere-backend.vercel.app/user/${id}`, {
         method: 'PUT',
@@ -19,6 +16,18 @@ export const updateUserAdminStatus = createAsyncThunk('users/updateUserAdminStat
     });
     const data = await response.json();
     return data.user;
+});
+
+export const deleteUser = createAsyncThunk('users/deleteUser', async (id) => {
+    const response = await fetch(`https://disaster-sphere-backend.vercel.app/user/${id}`, {
+        method: 'DELETE',
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to delete the user');
+    }
+
+    return id;
 });
 
 const allUsersSlice = createSlice({
@@ -48,6 +57,9 @@ const allUsersSlice = createSlice({
                 if (existingUser) {
                     existingUser.isAdmin = isAdmin;
                 }
+            })
+            .addCase(deleteUser.fulfilled, (state, action) => {
+                state.users = state.users.filter(user => user._id !== action.payload);
             });
     },
 });

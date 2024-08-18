@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import statesData from './states.json'; // Adjust the path as necessary
+import statesData from './states.json'; 
 import toast, { Toaster } from 'react-hot-toast';
 import './AddDisaster.css'
 import { Link } from 'react-router-dom';

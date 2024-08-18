@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUsers, updateUserAdminStatus } from '../redux/allUsersSlice';
 import UserList from '../components/UserList';
 import StatsCard from '../components/StatsCard';
 import './Admin.css';
@@ -8,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Navigate } from 'react-router-dom';
 import statesData from './states.json';
 import NonVerifiedDisasters from '../components/NonVerifiedDisasters';
+import { fetchUsers, updateUserAdminStatus, deleteUser } from '../redux/allUsersSlice';
 
 const Admin = () => {
     const dispatch = useDispatch();
@@ -40,6 +40,11 @@ const Admin = () => {
         if (userToUpdate) {
             dispatch(updateUserAdminStatus({ id, isAdmin: !userToUpdate.isAdmin }));
         }
+    };
+
+    const handleDeleteUser = (id) => {
+        console.log(id);
+        dispatch(deleteUser(id));
     };
 
     const adminCount = users.filter(user => user.isAdmin).length;
@@ -98,7 +103,7 @@ const Admin = () => {
                     <StatsCard title="Total Admins" count={adminCount} />
                     <StatsCard title="Total Disaters" count={disasters.length} />
                 </div>
-                <UserList users={users} makeAdmin={makeAdmin} />
+                <UserList users={users} makeAdmin={makeAdmin} deleteUser={handleDeleteUser} />
                 <NonVerifiedDisasters/>
             </div>
             <div className="alert-form">

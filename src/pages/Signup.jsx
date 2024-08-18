@@ -76,7 +76,7 @@ const Signup = () => {
                 setSelectedState('');
                 setSelectedCity('');
                 setProfileImage(null);
-                setCities([]); // Reset cities when form is submitted
+                setCities([]); 
             } else {
                 toast.error(data.error);
             }

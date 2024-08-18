@@ -7,6 +7,7 @@ const NonVerifiedDisasters = () => {
     const dispatch = useDispatch();
     const disasters = useSelector((state) => state.disasters.disasters);
     const status = useSelector((state) => state.disasters.status);
+    const isAdmin = useSelector((state) => state.user.isAdmin);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -32,8 +33,8 @@ const NonVerifiedDisasters = () => {
                         <th>State</th>
                         <th>City</th>
                         <th>Description</th>
-                        <th>Actions</th>
-                        <th>Delete</th>
+                        {isAdmin && <><th>Actions</th>
+                        <th>Delete</th></>}
                     </tr>
                 </thead>
                 <tbody>
@@ -45,12 +46,12 @@ const NonVerifiedDisasters = () => {
                                 <td>{disaster.state}</td>
                                 <td>{disaster.city}</td>
                                 <td>{disaster.disc}</td>
-                                <td>
+                                {isAdmin && <><td>
                                     <button onClick={() => handleVerify(disaster._id)}>Verify</button>
                                 </td>
                                 <td>
                                     <button onClick={() => handleDelete(disaster._id)}>Delete</button>
-                                </td>
+                                    </td></>}
                             </tr>
                         ))}
                 </tbody>

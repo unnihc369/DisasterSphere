@@ -15,6 +15,8 @@ const DisasterDetail = () => {
     const [loading, setLoading] = useState(true);
     const [itemName, setItemName] = useState('');
     const [quantityNeeded, setQuantityNeeded] = useState(0);
+    const [locationLink, setLocationLink] = useState('');
+    const [location, setLocation] = useState({ latitude: null, longitude: null });
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
 
@@ -124,7 +126,6 @@ const DisasterDetail = () => {
             const response = await axios.put(`https://disaster-sphere-backend.vercel.app/mat/verify/${materialId}`);
 
             if (response.status === 200) {
-                // Update the state with the newly verified material
                 setMaterials(materials.map(material =>
                     material._id === materialId ? { ...material, isVerified: true } : material
                 ));
@@ -168,7 +169,9 @@ const DisasterDetail = () => {
                 return;
             });
         }
-
+        let loc = `https://google.com/maps?q=${location.latitude},${location.longitude}`
+        setLocationLink(loc)
+        console.log(locationLink);
         try {
             const response = await fetch('https://disaster-sphere-backend.vercel.app/posts', {
                 method: 'POST',
@@ -182,14 +185,15 @@ const DisasterDetail = () => {
                     priority,
                     disasterId: id,
                     userId: user._id,
-                    username: user.name
+                    username: user.name,
+                    locationLink
                 })
             });
 
             const data = await response.json();
             if (response.ok) {
                 toast.success(data.message);
-                setPosts((prevPosts) => [...prevPosts, data.post]); // Add the new post to the state
+                setPosts((prevPosts) => [...prevPosts, data.post]);
                 setTitle('');
                 setDesc('');
                 setPostImage(null);
@@ -212,6 +216,22 @@ const DisasterDetail = () => {
             }
         } catch (error) {
             toast.error('Failed to delete post.');
+        }
+    };
+
+    const handleGetLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLocation({ latitude, longitude });
+                },
+                (error) => {
+                    setError(error.message);
+                }
+            );
+        } else {
+            setError("Geolocation is not supported by this browser.");
         }
     };
 
@@ -239,7 +259,7 @@ const DisasterDetail = () => {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get(`https://disaster-sphere-backend.vercel.app/posts/disaster/${id}`);
-                setPosts(response.data.sort((a, b) => a.priority - b.priority)); // Sort by priority
+                setPosts(response.data.sort((a, b) => a.priority - b.priority)); 
             } catch (error) {
                 console.error('Failed to fetch posts:', error);
             }
@@ -279,7 +299,7 @@ const DisasterDetail = () => {
                         <h3>Required Materials</h3>
                         <ul className="materials-list">
                             {materials
-                                .filter(material => user.isAdmin || material.isVerified) // Only show verified materials to volunteers
+                                .filter(material => user.isAdmin || material.isVerified) 
                                 .map(material => (
                                     <li key={material._id} className="material-item">
                                         <p>{material.itemName} - Quantity Needed: {material.quantityNeeded}</p>
@@ -342,13 +362,28 @@ const DisasterDetail = () => {
                             <h4>{post.title}</h4>
                             <h6>{post.username}</h6>
                             <p>{post.disc}</p>
-                            {post.imageUrl && <img src={post.imageUrl} alt={post.title} className="post-image" />}
+
+                            {post.imageUrl && (
+                                <img src={post.imageUrl} alt={post.title} className="post-image" />
+                            )}
+
+                            {post.locationLink && (
+                                <div className="location-preview">
+                                    <Link to={post.locationLink}  rel="noopener noreferrer" >
+                                        My current location
+                                    </Link>
+                                </div>
+                            )}
+
                             {(user._id === post.userId || user.isAdmin) && (
-                                <button onClick={() => handleDeletePost(post._id)} className="delete-post-button">Delete Post</button>
+                                <button onClick={() => handleDeletePost(post._id)} className="delete-post-button">
+                                    Delete Post
+                                </button>
                             )}
                         </li>
                     ))}
                 </ul>
+
 
                 <form onSubmit={handleSubmitPost} className="post-form">
                     <input
@@ -369,9 +404,11 @@ const DisasterDetail = () => {
                         onChange={(e) => setPostImage(e.target.files[0])}
                         className="post-input"
                     />
+                    <button type="button" onClick={handleGetLocation} className="get-location-button">
+                        Get Current Location
+                    </button>
                     <button type="submit" className="add-post-button">Create Post</button>
                 </form>
-
 
             </div>
         </div>
